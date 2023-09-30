@@ -36,13 +36,18 @@ class UserController extends Controller
                     'status'=>$request->status
 
                 ]);
+                if ($request->status == 'Hostel_Owner') {
+                    $user->assignRole('Hostel_Owner');
+                } elseif ($request->status == 'Hostel_Searcher') {
+                    $user->assignRole('Hostel_Searcher');
+                }
 
 
                 return $user;
 
             });
             if ($user) {
-                $token = $user->createToken('Token Name')->accessToken;
+                $token = $user->createToken('auth_token')->accessToken;
 
                 return responseSuccess([
                     'data' => $user,
