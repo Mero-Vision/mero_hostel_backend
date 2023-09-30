@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateUserRequest extends FormRequest
 {
@@ -14,10 +15,10 @@ class CreateUserRequest extends FormRequest
     {
         return [
 
-            'name'=>['required'],
-            'email'=>['required'],
-            'password'=>['required'],
-            'status'=>['required'],
+            'name'=>['required','string','min:3','max:255'],
+            'email'=>['required','string','email',Rule::unique('users','email')],
+            'password'=>['required','min:8','confirmed'],
+            'status'=>['required','in:Hostel_Owner,Hostel_Searcher'],
         ];
     }
 
