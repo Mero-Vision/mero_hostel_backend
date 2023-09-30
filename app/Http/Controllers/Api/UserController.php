@@ -36,11 +36,18 @@ class UserController extends Controller
                     'status'=>$request->status
 
                 ]);
+
+
                 return $user;
 
             });
-            if($user!==null){
-                return responseSuccess(new UserResource($user),201,'User account is created successfully!');
+            if ($user) {
+                $token = $user->createToken('Token Name')->accessToken;
+
+                return responseSuccess([
+                    'data' => $user,
+                    'token' => $token,
+                ], 201, 'User account created successfully!');
             }
 
         }
