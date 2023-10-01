@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Resources\User\UserResource;
+use App\Mail\UserVerificationMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -48,7 +50,8 @@ class UserController extends Controller
             });
             if ($user) {
                 $token = $user->createToken('auth_token')->accessToken;
-
+                
+                Mail::to($request->input('email'))->send(new UserVerificationMail($user,$token));
                 return responseSuccess([
                     'data' => $user,
                     'token' => $token,

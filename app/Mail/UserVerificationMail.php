@@ -13,12 +13,14 @@ class UserVerificationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private $user,$token;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($user,$token)
     {
-        //
+            $this->user=$user;
+            $this->token=$token;
     }
 
     /**
@@ -34,13 +36,15 @@ class UserVerificationMail extends Mailable
     /**
      * Get the message content definition.
      */
-    public function content(): Content
-    {
-        return new Content(
-            markdown: 'mail.user-verification-mail',
-        );
-    }
 
+
+
+    public function build()
+    {
+
+        $data['user']=$this->user;
+        return $this->markdown('mail.user-verification-mail')->with($data);
+    }
     /**
      * Get the attachments for the message.
      *
