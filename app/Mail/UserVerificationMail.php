@@ -43,6 +43,8 @@ class UserVerificationMail extends Mailable
     {
 
         $data['user']=$this->user;
+        $data['token']=$this->token;
+        $data['url'] = url("/email-verified?token=$this->token");
         return $this->markdown('mail.user-verification-mail')->with($data);
     }
     /**
