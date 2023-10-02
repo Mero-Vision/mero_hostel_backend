@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -49,8 +50,15 @@ class UserController extends Controller
 
             });
             if ($user) {
-                $token = $user->createToken('auth_token')->accessToken;
-                
+                $token = Str::random(60);
+
+                DB::table('password_reset_tokens')->insert([
+                    'email' => $user->email,
+                    'token' => $token,
+                    'created_at' => now(),
+                ]);
+
+
                 Mail::to($request->input('email'))->send(new UserVerificationMail($user,$token));
                 return responseSuccess([
                     'data' => $user,
