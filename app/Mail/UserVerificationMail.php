@@ -23,6 +23,8 @@ class UserVerificationMail extends Mailable
             $this->token=$token;
     }
 
+
+
     /**
      * Get the message envelope.
      */
