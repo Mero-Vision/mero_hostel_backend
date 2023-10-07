@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -21,3 +22,5 @@ Route::group(['prefix'=>'users'],function(){
 });
 
 Route::post('/login',[LoginController::class,'login']);
+
+Route::post('forgot-password',[ForgotPasswordController::class,'forgotpassword']);
