@@ -23,4 +23,4 @@ Route::group(['prefix'=>'users'],function(){
 
 Route::post('/login',[LoginController::class,'login']);
 
-Route::post('forgot-password',[ForgotPasswordController::class,'forgotpassword']);
+Route::post('send-forgot-password-mail',[ForgotPasswordController::class,'sendForgotPasswordMail']);

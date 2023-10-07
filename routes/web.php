@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\LoginController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,8 @@ Route::get('/', function () {
 });
 
 Route::get('/email-verified',[LoginController::class,'emailVerification']);
+
+Route::get('/forgot-password',[ForgotPasswordController::class,'forgotpassword']);
+Route::post('/reset-password',[ForgotPasswordController::class,'resetPassword']);
 
 
