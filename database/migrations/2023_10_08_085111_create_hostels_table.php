@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('hostels', function (Blueprint $table) {
             $table->id();
             $table->string('hostel_name');
+            $table->string('slug')->nullable();
             $table->string('address')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateHostelRequest;
+use App\Http\Resources\HostelResource;
+use App\Models\Hostel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HostelController extends Controller
 {
@@ -21,7 +24,30 @@ class HostelController extends Controller
      */
     public function store(CreateHostelRequest $request)
     {
-        //
+        try{
+
+            $hostel=DB::transaction(function () use($request){
+                $hostel=Hostel::create([
+                    'hostel_name'=>$request->hostel_name,
+                    'address'=>$request->address,
+                    'phone_number'=>$request->phone_number,
+                    'email'=>$request->email,
+                    'website'=>$request->website,
+                    'user_id'=>$request->user_id,
+
+                ]);
+                return $hostel;
+
+            });
+            if($hostel){
+                return responseSuccess(new HostelResource($hostel),200,'Hostel has been created successfully!');
+            }
+
+        }
+        catch(\Exception $e){
+            return responseError($e->getMessage(),500);
+
+        }
     }
 
     /**
@@ -43,8 +69,26 @@ class HostelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($slug)
     {
-        //
+        try{
+            $hostel=Hostel::where('slug',$slug)->first();
+            if (is_null($hostel)){
+                return responseError('Slug not found!',404);
+            }
+            $hostel=DB::transaction(function()use($hostel){
+                $hostel->delete();
+                return $hostel;
+
+            });
+            if($hostel){
+                return responseSuccess(null,204);
+            }
+
+        }
+        catch(\Exception $e){
+            return responseError($e->getMessage(),500);
+
+        }
     }
 }
