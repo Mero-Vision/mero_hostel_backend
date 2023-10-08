@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateHostelRequest;
 use Illuminate\Http\Request;
 
 class HostelController extends Controller
@@ -18,7 +19,7 @@ class HostelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateHostelRequest $request)
     {
         //
     }
