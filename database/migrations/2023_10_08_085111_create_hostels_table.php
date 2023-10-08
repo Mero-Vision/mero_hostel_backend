@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('website')->nullable();
             $table->foreignId('user_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
