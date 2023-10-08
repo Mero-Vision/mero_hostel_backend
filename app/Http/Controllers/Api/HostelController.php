@@ -16,7 +16,10 @@ class HostelController extends Controller
      */
     public function index()
     {
-        //
+        $slug=request()->query('slug');
+        $hostel=Hostel::where('slug',$slug)->latest()->get();
+        return HostelResource::collection($hostel);
+
     }
 
     /**
