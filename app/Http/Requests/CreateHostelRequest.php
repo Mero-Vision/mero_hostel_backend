@@ -19,7 +19,9 @@ class CreateHostelRequest extends ApiRequest
             'phone_number'=>['required'],
             'email'=>['nullable','email'],
             'website'=>['required'],
-            'user_id'=>['required']
+            'user_id'=>['required'],
+            'hostel_image'=>['nullable', 'array'],
+            'hostel_image.*'=>['image'],
 
         ];
     }

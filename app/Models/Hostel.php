@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Hostel extends BaseModel
+class Hostel extends BaseModel implements HasMedia
 {
     use HasFactory;
     use HasSlug;
     use SoftDeletes;
+    use InteractsWithMedia;
 
     public function getSlugOptions() : SlugOptions
     {
