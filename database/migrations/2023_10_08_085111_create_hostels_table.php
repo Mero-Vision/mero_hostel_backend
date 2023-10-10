@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('hostels', function (Blueprint $table) {
             $table->id();
             $table->string('hostel_name');
+            $table->string('hostel_type');
             $table->string('slug')->nullable();
             $table->string('address')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
+            $table->text('location')->nullable();
+            $table->string('floor')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
