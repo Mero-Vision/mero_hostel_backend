@@ -25,6 +25,7 @@ class HostelResource extends JsonResource
             'user_id'=>$this->user_id,
             'created_at'=>$this->created_at,
             'updated_at'=>$this->updated_at,
+            'hostel_image'=>$this->getMedia('hostel_image'),
         ];
     }
 }

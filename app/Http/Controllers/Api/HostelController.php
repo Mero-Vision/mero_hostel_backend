@@ -29,7 +29,6 @@ class HostelController extends Controller
     {
         try{
 
-
             $hostel=DB::transaction(function () use($request){
                 $hostel=Hostel::create([
                     'hostel_name'=>$request->hostel_name,
