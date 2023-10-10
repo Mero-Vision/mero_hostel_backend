@@ -29,6 +29,7 @@ class HostelController extends Controller
     {
         try{
 
+
             $hostel=DB::transaction(function () use($request){
                 $hostel=Hostel::create([
                     'hostel_name'=>$request->hostel_name,
@@ -39,6 +40,11 @@ class HostelController extends Controller
                     'user_id'=>$request->user_id,
 
                 ]);
+                if ($request->hostel_image) {
+                    foreach ($request->hostel_image as $image) {
+                        $hostel->addMedia($image)->toMediaCollection('hostel_image');
+                    }
+                }
                 return $hostel;
 
             });
