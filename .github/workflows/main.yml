@@ -1,0 +1,20 @@
+name: Deploy
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.ACCOUNTING_SECRET_KEY }}
+        port: 22
+        script: |
+          cd /home/hancieph/merohostel.hancie-phago.com.np
+          git pull origin main
+          php artisan migrate
+          git status
