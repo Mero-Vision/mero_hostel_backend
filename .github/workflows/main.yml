@@ -11,7 +11,7 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
-        key: ${{ secrets.ACCOUNTING_SECRET_KEY }}
+        key: ${{ secrets.SECRET_KEY }}
         port: 22
         script: |
           cd /home/hancieph/merohostel.hancie-phago.com.np
