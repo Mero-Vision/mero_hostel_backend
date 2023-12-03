@@ -8,6 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Room extends BaseModel
 {
     use HasFactory;
-
-    
 }
