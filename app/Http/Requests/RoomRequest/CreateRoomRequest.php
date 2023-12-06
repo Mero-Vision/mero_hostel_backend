@@ -18,9 +18,10 @@ class CreateRoomRequest extends ApiRequest
             'room_type' => ['required'],
             'capacity' => ['required'],
             'availability' => ['required'],
-            'price' => ['required'],
-            'features' => ['required'],
+            'price' => ['required', 'numeric'],
+            'features' => ['nullable'],
             'hostel_id' => ['required'],
+            'room_image'=>['nullable','image'],
         ];
     }
 

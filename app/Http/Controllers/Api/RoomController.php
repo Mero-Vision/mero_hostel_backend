@@ -37,6 +37,9 @@ class RoomController extends Controller
                     'features' => $request->features,
                     'hostel_id' => $request->hostel_id,
                 ]);
+                if ($request->room_image) {
+                    $room->addMedia($request->room_image)->toMediaCollection('room_image');
+                }
                 return $room;
             });
 
