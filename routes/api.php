@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ForgotPasswordController;
+use App\Http\Controllers\Api\HostelController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -17,10 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix'=>'users'],function(){
-        Route::apiResource('/',UserController::class);
+Route::group(['prefix' => 'users'], function () {
+    Route::apiResource('/', UserController::class);
 });
 
-Route::post('/login',[LoginController::class,'login']);
+Route::post('/login', [LoginController::class, 'login']);
 
-Route::post('send-forgot-password-mail',[ForgotPasswordController::class,'sendForgotPasswordMail']);
+Route::post('send-forgot-password-mail', [ForgotPasswordController::class, 'sendForgotPasswordMail']);
+
+Route::get('/hostels', [HostelController::class, 'index']);
