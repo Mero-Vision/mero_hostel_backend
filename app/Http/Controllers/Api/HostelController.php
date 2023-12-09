@@ -17,8 +17,11 @@ class HostelController extends Controller
      */
     public function index()
     {
+        $hostelType = request()->query('hostel_type');
+        $hostel = Hostel::when($hostelType,function($query) use($hostelType){
+            $query->where('hostel_type',$hostelType);
 
-        $hostel = Hostel::latest()->get();
+        })->latest()->get();
         return HostelResource::collection($hostel);
     }
 
