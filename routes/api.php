@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix'=>'users','middleware' => 'firewall.all'],function(){
+Route::group(['prefix'=>'users'],function(){
         Route::apiResource('/',UserController::class);
 });
 

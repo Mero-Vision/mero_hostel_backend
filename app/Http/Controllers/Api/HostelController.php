@@ -32,6 +32,7 @@ class HostelController extends Controller
             $hostel = DB::transaction(function () use ($request) {
                 $hostel = Hostel::create([
                     'hostel_name' => $request->hostel_name,
+                    'hostel_type'=>$request->hostel_type,
                     'address' => $request->address,
                     'phone_number' => $request->phone_number,
                     'email' => $request->email,
@@ -80,6 +81,7 @@ class HostelController extends Controller
             $hostel = DB::transaction(function () use ($hostel, $request) {
                 $hostel->update([
                     'hostel_name' => $request->hostel_name,
+                    'hostel_type'=>$request->hostel_type,
                     'address' => $request->address,
                     'phone_number' => $request->phone_number,
                     'email' => $request->email,

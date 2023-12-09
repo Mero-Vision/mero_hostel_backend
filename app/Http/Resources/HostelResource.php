@@ -17,6 +17,7 @@ class HostelResource extends JsonResource
         return [
             'id'=>$this->id,
             'hostel_name'=>$this->hostel_name,
+            'hostel_type'=>$this->hostel_type,
             'slug'=>$this->slug,
             'address'=>$this->address,
             'phone_number'=>$this->phone_number,
