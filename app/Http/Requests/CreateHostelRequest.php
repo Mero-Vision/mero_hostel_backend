@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateHostelRequest extends ApiRequest
 {
@@ -15,7 +16,7 @@ class CreateHostelRequest extends ApiRequest
         return [
 
             'hostel_name'=>['required'],
-            'hostel_type'=>['required'],
+            'hostel_type'=>['required',Rule::in('Boys hostel', 'Girls hostel')],
             'address'=>['required'],
             'phone_number'=>['required'],
             'email'=>['nullable','email'],
