@@ -39,6 +39,10 @@ class UserController extends Controller
                     'status'=>$request->status
 
                 ]);
+                if ($request->user_image) {
+                    $user->addMedia($request->user_image)->toMediaCollection('profile_image');
+                }
+                
                 if ($request->status == 'Hostel_Owner') {
                     $user->assignRole('Hostel_Owner');
                 } elseif ($request->status == 'Hostel_Searcher') {

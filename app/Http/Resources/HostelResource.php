@@ -17,6 +17,7 @@ class HostelResource extends JsonResource
         return [
             'id'=>$this->id,
             'hostel_name'=>$this->hostel_name,
+            'hostel_type'=>$this->hostel_type,
             'slug'=>$this->slug,
             'address'=>$this->address,
             'phone_number'=>$this->phone_number,
@@ -25,7 +26,7 @@ class HostelResource extends JsonResource
             'user_id'=>$this->user_id,
             'created_at'=>$this->created_at,
             'updated_at'=>$this->updated_at,
-            'hostel_images'=>$this->getMedia('hostel_image')->pluck('original_url'),
+            'hostel_images'=>$this->getFirstMediaUrl('hostel_image'),
         ];
     }
 }

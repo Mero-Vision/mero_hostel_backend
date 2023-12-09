@@ -11,14 +11,15 @@ class CreateUserRequest extends FormRequest
      * Determine if the user is authorized to make this request.
      */
 
-      public function rules(): array
+    public function rules(): array
     {
         return [
 
-            'name'=>['required','string','min:3','max:255'],
-            'email'=>['required','string','email',Rule::unique('users','email')],
-            'password'=>['required','min:8','confirmed'],
-            'status'=>['required','in:Hostel_Owner,Hostel_Searcher'],
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'email' => ['required', 'string', 'email', Rule::unique('users', 'email')],
+            'password' => ['required', 'min:8', 'confirmed'],
+            'status' => ['required', 'in:Hostel_Owner,Hostel_Searcher'],
+            'profile_image' => ['nullable', 'image'],
         ];
     }
 

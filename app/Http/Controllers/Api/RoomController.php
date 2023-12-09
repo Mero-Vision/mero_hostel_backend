@@ -17,8 +17,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $room = Room::latest()->get();
-        return RoomResource::collection($room);
+        $rooms = Room::latest()->get();
+        return RoomResource::collection($rooms);
     }
 
     /**
@@ -37,6 +37,9 @@ class RoomController extends Controller
                     'features' => $request->features,
                     'hostel_id' => $request->hostel_id,
                 ]);
+                if ($request->room_image) {
+                    $room->addMedia($request->room_image)->toMediaCollection('room_image');
+                }
                 return $room;
             });
 
@@ -101,7 +104,7 @@ class RoomController extends Controller
         }
         try {
             $room = DB::transaction(function () use ($room) {
-                $room->destroy();
+                $room->delete();
                 return $room;
             });
             if ($room) {

@@ -17,7 +17,7 @@ class HostelController extends Controller
      */
     public function index()
     {
-        
+
         $hostel = Hostel::latest()->get();
         return HostelResource::collection($hostel);
     }
@@ -32,6 +32,7 @@ class HostelController extends Controller
             $hostel = DB::transaction(function () use ($request) {
                 $hostel = Hostel::create([
                     'hostel_name' => $request->hostel_name,
+                    'hostel_type'=>$request->hostel_type,
                     'address' => $request->address,
                     'phone_number' => $request->phone_number,
                     'email' => $request->email,
@@ -40,9 +41,8 @@ class HostelController extends Controller
 
                 ]);
                 if ($request->hostel_image) {
-                    foreach ($request->hostel_image as $image) {
-                        $hostel->addMedia($image)->toMediaCollection('hostel_image');
-                    }
+
+                    $hostel->addMedia($request->hostel_image)->toMediaCollection('hostel_image');
                 }
                 return $hostel;
             });
@@ -59,11 +59,10 @@ class HostelController extends Controller
      */
     public function show($slug)
     {
-        $hostel = Hostel::where('slug',$slug)->first();
-        if(is_null($hostel)){
+        $hostel = Hostel::where('slug', $slug)->first();
+        if (is_null($hostel)) {
             return responseError('Slug not found!', 404);
-        }
-        else{
+        } else {
             return responseSuccess(new HostelResource($hostel));
         }
     }
@@ -82,6 +81,7 @@ class HostelController extends Controller
             $hostel = DB::transaction(function () use ($hostel, $request) {
                 $hostel->update([
                     'hostel_name' => $request->hostel_name,
+                    'hostel_type'=>$request->hostel_type,
                     'address' => $request->address,
                     'phone_number' => $request->phone_number,
                     'email' => $request->email,

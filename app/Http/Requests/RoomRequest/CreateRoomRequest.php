@@ -4,6 +4,7 @@ namespace App\Http\Requests\RoomRequest;
 
 use App\Http\Requests\ApiRequest;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateRoomRequest extends ApiRequest
 {
@@ -14,13 +15,14 @@ class CreateRoomRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'room_number' => ['required'],
+            'room_number' => ['required', Rule::unique('rooms','room_number')],
             'room_type' => ['required'],
             'capacity' => ['required'],
             'availability' => ['required'],
-            'price' => ['required'],
-            'features' => ['required'],
+            'price' => ['required', 'numeric'],
+            'features' => ['nullable'],
             'hostel_id' => ['required'],
+            'room_image'=>['nullable','image'],
         ];
     }
 

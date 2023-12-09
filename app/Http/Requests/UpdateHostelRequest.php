@@ -14,13 +14,12 @@ class UpdateHostelRequest extends ApiRequest
     {
         return [
             'hostel_name'=>['required'],
+            'hostel_type'=>['required'],
             'address'=>['required'],
             'phone_number'=>['required'],
             'email'=>['nullable','email'],
             'website'=>['required'],
-            'user_id'=>['required'],
-            'hostel_image'=>['nullable', 'array'],
-            'hostel_image.*'=>['image'],
+            'hostel_image'=>['nullable', 'image'],
 
         ];
     }
