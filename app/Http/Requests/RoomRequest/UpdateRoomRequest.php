@@ -4,6 +4,7 @@ namespace App\Http\Requests\RoomRequest;
 
 use App\Http\Requests\ApiRequest;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRoomRequest extends ApiRequest
 {
@@ -14,11 +15,11 @@ class UpdateRoomRequest extends ApiRequest
       public function rules(): array
     {
         return [
-            'room_number' => ['required'],
+            'room_number' => ['required', Rule::unique('rooms','room_number')],
             'room_type' => ['required'],
             'capacity' => ['required'],
             'availability' => ['required'],
-            'price' => ['required'],
+            'price' => ['required', 'numeric'],
             'features' => ['required'],
         ];
     }
