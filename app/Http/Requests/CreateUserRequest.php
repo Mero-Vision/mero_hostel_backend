@@ -18,7 +18,6 @@ class CreateUserRequest extends FormRequest
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'email' => ['required', 'string', 'email', Rule::unique('users', 'email')],
             'password' => ['required', 'min:8', 'confirmed'],
-            'status' => ['required', 'in:Hostel_Owner,Hostel_Searcher'],
             'profile_image' => ['nullable', 'image'],
         ];
     }
