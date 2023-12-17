@@ -77,6 +77,38 @@ class UserController extends Controller
         }
     }
 
+    public function updateStatus(Request $request){
+
+        $email=$request->email;
+        $user=User::where('email',$email)->first();
+        if(!$user){
+            return responseError('User Not Found',404);
+        }
+
+        try{
+            $status=DB::transaction(function()use($user,$request){
+                $user->update([
+                    'status'=>$request->status
+                    
+                ]);
+                return $user;
+                
+
+                
+                
+            });
+            if($user){
+                return responseSuccess($user,200,'Status updated successfully!');
+            }
+            
+        }
+        catch(\Exception $e){
+            return responseError($e->getMessage(),500);
+            
+        }
+        
+    }
+
     /**
      * Display the specified resource.
      */
