@@ -18,9 +18,17 @@ class HostelController extends Controller
     public function index()
     {
         $hostelType = request()->query('hostel_type');
-        $hostel = Hostel::when($hostelType,function($query) use($hostelType){
+        $userID=request()->query('user_id');
+        
+        $hostel = Hostel::with(['users'=>function($query){
+            $query->where('status','Hostel_Owner');
+            
+        }])->when($hostelType,function($query) use($hostelType){
             $query->where('hostel_type',$hostelType);
 
+        })->when($userID,function($query)use($userID){
+            $query->where('user_id',$userID);
+            
         })->latest()->get();
         return HostelResource::collection($hostel);
     }

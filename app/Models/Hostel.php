@@ -24,5 +24,9 @@ class Hostel extends BaseModel implements HasMedia
             ->saveSlugsTo('slug');
     }
 
+    public function users(){
+        return $this->belongsTo(User::class,'user_id');
+    }
+
 
 }

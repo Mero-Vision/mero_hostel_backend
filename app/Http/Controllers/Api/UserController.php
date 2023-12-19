@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -114,7 +114,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
+       
     }
 
     /**
