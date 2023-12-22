@@ -58,7 +58,7 @@ class HostelController extends Controller
                 return $hostel;
             });
             if ($hostel) {
-                return responseSuccess(new HostelResource($hostel), 200, 'Hostel has been created successfully!');
+                return responseSuccess($hostel, 200, 'Hostel has been created successfully!');
             }
         } catch (\Exception $e) {
             return responseError($e->getMessage(), 500);
