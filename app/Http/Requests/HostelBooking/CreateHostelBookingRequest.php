@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\HostelBooking;
 
+use App\Http\Requests\ApiRequest;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class CreateHostelRequest extends ApiRequest
+class CreateHostelBookingRequest extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,16 +14,7 @@ class CreateHostelRequest extends ApiRequest
       public function rules(): array
     {
         return [
-
-            'hostel_name'=>['required'],
-            'hostel_type'=>['required',Rule::in('Boys hostel', 'Girls hostel')],
-            'address'=>['required'],
-            'phone_number'=>['required'],
-            'email'=>['nullable','email'],
-            'website'=>['nullable'],
-            'hostel_image'=>['nullable','image'],
-
-
+            'hostel_id'=>['required']
         ];
     }
 

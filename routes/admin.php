@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\HostelBookingController;
 use App\Http\Controllers\Api\HostelController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\UserController;
@@ -16,4 +17,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('rooms', RoomController::class)->parameters(["rooms" => 'id']);
 
     Route::post('user/status/update',[UserController::class, 'updateStatus']);
+
+    Route::post('hostel-booking',[HostelBookingController::class,'store']);
+    Route::get('hostel-booking', [HostelBookingController::class, 'index']);
 });
