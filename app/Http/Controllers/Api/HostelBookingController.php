@@ -32,6 +32,10 @@ class HostelBookingController extends Controller
      */
     public function store(CreateHostelBookingRequest $request)
     {
+        $hostel=HostelBooking::where('hostel_id',$request->hostel_id)->where('user_id',auth()->user()->id)->first();
+        if($hostel){
+            return responseError('You have already requested this hostel',500);
+        }
         try {
             $booking = DB::transaction(function () use ($request) {
                 $booking = HostelBooking::create([
