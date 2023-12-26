@@ -17,7 +17,13 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::latest()->get();
+        $hostelID=request()->query('hostel_id');
+        
+        $rooms = Room::when($hostelID,function($query)use($hostelID){
+            $query->where('hostel_id',$hostelID);
+            
+        })->latest()->get();
+        
         return RoomResource::collection($rooms);
     }
 
