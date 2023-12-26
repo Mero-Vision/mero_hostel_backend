@@ -114,7 +114,11 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        
+        $user=User::find($id);
+        if(!$user){
+            return responseError('User not found!',404);
+        }
+        return new UserResource($user);
        
     }
 
@@ -135,11 +139,15 @@ class UserController extends Controller
                     'email'=>$request->email
                     
                 ]);
+                if ($request->profile_image) {
+                    $user->clearMediaCollection('profile_image');
+                    $user->addMedia($request->profile_image)->toMediaCollection('profile_image');
+                }
                 return $user;
                 
             });
             if($user){
-                return responseSuccess($user,200,'User data updated successfully!');
+                return responseSuccess(new UserResource($user),200,'User data updated successfully!');
             }
             
         }
