@@ -123,7 +123,32 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user=User::find($id);
+        if(!$user){
+            return responseSuccess('User Not Found',404);
+            
+        }
+        try{
+            $user=DB::transaction(function()use($user,$request){
+                $user->update([
+                    'name'=>$request->name,
+                    'email'=>$request->email
+                    
+                ]);
+                return $user;
+                
+            });
+            if($user){
+                return responseSuccess($user,200,'User data updated successfully!');
+            }
+            
+        }
+        catch(\Exception $e){
+            return responseError($e->getMessage(),500);
+            
+        }
+            
+        
     }
 
     /**
