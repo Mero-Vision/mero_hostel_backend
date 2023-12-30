@@ -33,6 +33,8 @@ class HostelController extends Controller
         return HostelResource::collection($hostel);
     }
 
+ 
+
     /**
      * Store a newly created resource in storage.
      */

@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('user/status/update',[UserController::class, 'updateStatus']);
     Route::put('user/{id}', [UserController::class, 'update']);
     Route::get('user/{id}', [UserController::class, 'show']);
+    Route::get('users', [UserController::class, 'index']);
 
     Route::post('hostel-booking',[HostelBookingController::class,'store']);
     Route::get('hostel-booking', [HostelBookingController::class, 'index']);

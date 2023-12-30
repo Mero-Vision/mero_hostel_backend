@@ -82,7 +82,7 @@ class HostelBookingController extends Controller
                     
                 ]);
                 $user=$user->update([
-                    'hotel_id'=>$booking->hostel_id,
+                    'hostel_id'=>$booking->hostel_id,
                     'status'=>'Hostel_User'
                 ]);
                 return $booking;

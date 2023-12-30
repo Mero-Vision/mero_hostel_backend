@@ -20,7 +20,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        $hostel_id=request()->query('hostel_id');
+        $users=User::when($hostel_id,function($query)use($hostel_id){
+            $query->where('hostel_id',$hostel_id);
+            
+        })->latest()->get();
+
+        return UserResource::collection($users);
     }
 
     /**
