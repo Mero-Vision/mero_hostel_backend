@@ -81,6 +81,10 @@ class HostelBookingController extends Controller
                     'status'=>'approved'
                     
                 ]);
+
+                HostelBooking::where('user_id', $user->id)
+                ->where('status', 'pending')
+                ->update(['status' => '']);
                 $user=$user->update([
                     'hostel_id'=>$booking->hostel_id,
                     'status'=>'Hostel_User'
