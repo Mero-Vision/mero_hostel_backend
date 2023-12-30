@@ -26,6 +26,7 @@ class RoomResource extends JsonResource
             'room_image'=>$this->getFirstMediaUrl('room_image'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+           
         ];
     }
 }
