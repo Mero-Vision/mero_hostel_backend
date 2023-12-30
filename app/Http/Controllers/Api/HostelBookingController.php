@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\HostelBooking\CreateHostelBookingRequest;
 use App\Http\Resources\HostelBookingPendingResource;
 use App\Models\HostelBooking;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -66,7 +67,37 @@ class HostelBookingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $booking=HostelBooking::find($id);
+        if(!$booking){
+            return responseError('Booking ID Not Found!',404);
+        }
+        $user=User::where('id',$booking->user_id)->first();
+        if(!$user){
+            return responseError('User Not Found!',404);
+        }
+        try{
+            DB::transaction(function()use($booking,$user){
+                $booking->update([
+                    'status'=>'approved'
+                    
+                ]);
+                $user=$user->update([
+                    'hotel_id'=>$booking->hostel_id,
+                    'status'=>'Hostel_User'
+                ]);
+                return $booking;
+                
+            });
+        
+            if($booking){
+                return responseSuccess($booking,200,'Booking approved successfully!');
+            }
+            
+        }
+        catch(\Exception $e){
+            return responseError($e->getMessage(),500);
+            
+        }
     }
 
     /**

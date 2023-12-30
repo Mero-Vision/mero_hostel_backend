@@ -22,4 +22,5 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('hostel-booking',[HostelBookingController::class,'store']);
     Route::get('hostel-booking', [HostelBookingController::class, 'index']);
+    Route::put('hostel-booking/{id}', [HostelBookingController::class, 'update']);
 });
