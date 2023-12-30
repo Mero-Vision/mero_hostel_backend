@@ -29,6 +29,8 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
+
+
     /**
      * Store a newly created resource in storage.
      */
