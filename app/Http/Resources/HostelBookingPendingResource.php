@@ -17,6 +17,7 @@ class HostelBookingPendingResource extends JsonResource
         $user = $this->users;
         return [
             'id'=>$this->id,
+            'user_id'=>$this->user_id,
            'name'=>$this->name,
            'email'=>$this->email,
            'requested'=>$this->created_at->diffForHumans(),

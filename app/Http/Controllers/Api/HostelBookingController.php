@@ -21,10 +21,23 @@ class HostelBookingController extends Controller
         
         $hostelBooking=HostelBooking::join('users','users.id','=', 'hostel_bookings.user_id')
         ->join('hostels','hostels.id','=', 'hostel_bookings.hostel_id')
-        ->select('hostel_bookings.id','users.name','users.email','hostel_bookings.created_at')
+        ->select('hostel_bookings.id','hostel_bookings.user_id as user_id', 'users.name','users.email','hostel_bookings.created_at')
         ->where('hostels.user_id',$userID)->where('hostel_bookings.status','pending')->latest('hostel_bookings.created_at','desc')->get();
 
         
+        return HostelBookingPendingResource::collection($hostelBooking);
+    }
+
+    public function approvedUsers()
+    {
+        $userID = request()->query('user_id');
+
+        $hostelBooking = HostelBooking::join('users', 'users.id', '=', 'hostel_bookings.user_id')
+        ->join('hostels', 'hostels.id', '=', 'hostel_bookings.hostel_id')
+        ->select('hostel_bookings.id', 'hostel_bookings.user_id as user_id', 'users.name', 'users.email', 'hostel_bookings.created_at')
+        ->where('hostels.user_id', $userID)->where('hostel_bookings.status', 'approved')->latest('hostel_bookings.created_at', 'desc')->get();
+
+
         return HostelBookingPendingResource::collection($hostelBooking);
     }
 
