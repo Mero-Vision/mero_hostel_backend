@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\UserRoom;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,10 +24,11 @@ class RoomResource extends JsonResource
             'price' => $this->price,
             'features' => $this->features,
             'hostel_id' => $this->hostel_id,
-            'room_image'=>$this->getFirstMediaUrl('room_image'),
+            'room_image' => $this->getFirstMediaUrl('room_image'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-           
+            'users' => UserRoomResource::collection($this->userRooms) ?? null,
+
         ];
     }
 }

@@ -17,13 +17,12 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $hostelID=request()->query('hostel_id');
-        
-        $rooms = Room::when($hostelID,function($query)use($hostelID){
-            $query->where('hostel_id',$hostelID);
-            
+        $hostelID = request()->query('hostel_id');
+
+        $rooms = Room::when($hostelID, function ($query) use ($hostelID) {
+            $query->where('hostel_id', $hostelID);
         })->latest()->get();
-        
+
         return RoomResource::collection($rooms);
     }
 
@@ -120,4 +119,5 @@ class RoomController extends Controller
             return responseError($e->getMessage(), 500);
         }
     }
+
 }

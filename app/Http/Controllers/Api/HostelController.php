@@ -20,25 +20,25 @@ class HostelController extends Controller
         $hostelType = request()->query('hostel_type');
         $userID=request()->query('user_id');
         $search=request()->query('search');
-        
+
         $hostel = Hostel::with(['users'=>function($query){
             $query->where('status','Hostel_Owner');
-            
+
         }])->when($hostelType,function($query) use($hostelType){
             $query->where('hostel_type',$hostelType);
 
         })->when($userID,function($query)use($userID){
             $query->where('user_id',$userID);
-            
+
         })->when($search,function($query)use($search){
             $query->where('hostel_name','like','%'.$search.'%')
             ->orWhere('hostel_type','like','%'.$search.'%')->orWhere('address','like','%'.$search.'%');
-            
+
         })->latest()->get();
         return HostelResource::collection($hostel);
     }
 
- 
+
 
     /**
      * Store a newly created resource in storage.
@@ -134,6 +134,17 @@ class HostelController extends Controller
             }
         } catch (\Exception $e) {
             return responseError($e->getMessage(), 500);
+        }
+    }
+
+    /**
+     * Show all the users assigned to the specified hostel
+     */
+    public function hostelusers(string $id){
+        try {
+
+        } catch (\Exception $e) {
+            //throw $th;
         }
     }
 }
