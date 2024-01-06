@@ -18,23 +18,23 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::apiResource('rooms', RoomController::class)->parameters(["rooms" => 'id']);
 
-    Route::post('user/status/update',[UserController::class, 'updateStatus']);
+    Route::post('user/status/update', [UserController::class, 'updateStatus']);
     Route::put('user/{id}', [UserController::class, 'update']);
     Route::get('user/{id}', [UserController::class, 'show']);
     Route::get('users', [UserController::class, 'index']);
 
-    Route::post('hostel-booking',[HostelBookingController::class,'store']);
+    Route::post('hostel-booking', [HostelBookingController::class, 'store']);
     Route::get('hostel-booking', [HostelBookingController::class, 'index']);
 
 
-    
 
 
-=======
+
+
     Route::get('hostel-booking/approved-users', [HostelBookingController::class, 'approvedUsers']);
     Route::put('hostel-booking/{id}', [HostelBookingController::class, 'update']);
 
-    Route::apiResource('user-rooms',UserRoomController::class);
+    Route::apiResource('user-rooms', UserRoomController::class);
 
-Route::apiResource('hostel-features', HostelFeatureController::class)->parameters(["hostel-features"=>"id"]);
-
+    Route::apiResource('hostel-features', HostelFeatureController::class)->parameters(["hostel-features" => "id"]);
+});
