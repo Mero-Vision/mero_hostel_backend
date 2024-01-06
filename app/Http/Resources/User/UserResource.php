@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\User;
 
+use App\Http\Resources\UserRoomResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,6 +25,7 @@ class UserResource extends JsonResource
             'profile_image' => $this->getFirstMediaUrl('profile_image'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'user_room'=>new UserRoomResource($this->whenLoaded('userRoom')),
         ];
     }
 }

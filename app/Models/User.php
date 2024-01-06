@@ -25,6 +25,10 @@ class User extends Authenticatable implements HasMedia
      */
     protected $guarded=['id'];
 
+    public function userRoom(){
+        return $this->hasOne(UserRoom::class);
+    }
+
    
    
 
