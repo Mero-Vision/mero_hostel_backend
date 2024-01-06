@@ -11,4 +11,9 @@ class Room extends BaseModel implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
+
+    public function userRooms(){
+        
+        return $this->hasMany(UserRoom::class);
+    }
 }

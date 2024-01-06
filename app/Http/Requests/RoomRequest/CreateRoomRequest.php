@@ -15,7 +15,7 @@ class CreateRoomRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'room_number' => ['required', Rule::unique('rooms','room_number')],
+            'room_number' => ['required'],
             'room_type' => ['required'],
             'capacity' => ['required'],
             'availability' => ['required'],

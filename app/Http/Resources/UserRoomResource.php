@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class HostelBookingPendingResource extends JsonResource
+class UserRoomResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,13 +14,14 @@ class HostelBookingPendingResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $user = $this->users;
         return [
             'id'=>$this->id,
             'user_id'=>$this->user_id,
-           'name'=>$this->name,
-           'email'=>$this->email,
-           'requested'=>$this->created_at->diffForHumans(),
+            'room_id'=>$this->room_id,
+            'check_in_date'=>$this->check_in_date,
+            'check_out_date'=>$this->check_out_date,
+            'status'=>$this->status,
+            'created_at'=>$this->created_at,
            
         ];
     }
