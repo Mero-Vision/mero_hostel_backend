@@ -37,4 +37,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('user-rooms', UserRoomController::class);
 
     Route::apiResource('hostel-features', HostelFeatureController::class)->parameters(["hostel-features" => "id"]);
+
+    Route::get('user-room-detail',[RoomController::class, 'userRoom']);
 });

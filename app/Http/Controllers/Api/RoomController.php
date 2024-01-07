@@ -7,6 +7,7 @@ use App\Http\Requests\RoomRequest\CreateRoomRequest;
 use App\Http\Requests\RoomRequest\UpdateRoomRequest;
 use App\Http\Resources\RoomResource;
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,6 +25,18 @@ class RoomController extends Controller
         })->latest()->get();
 
         return RoomResource::collection($rooms);
+    }
+
+    public function userRoom(){
+        $userID=request()->query('user_id');
+
+        $user=User::join('user_rooms', 'user_rooms.user_id','=', 'users.id')
+        ->join('rooms', 'rooms.id','=', 'user_rooms.room_id')
+        ->join('hostels', 'hostels.id','=','users.hostel_id')->
+        where('user_rooms.user_id',$userID)->get();
+
+        return responseSuccess($user);
+        
     }
 
     /**
